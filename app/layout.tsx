@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "./_components/navbar";
 import MobileNavbar from "./_components/mobile-navbar";
+import { Toaster } from "react-hot-toast";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -28,6 +29,7 @@ export default function RootLayout({
           <Navbar />
           {children}
           <MobileNavbar />
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

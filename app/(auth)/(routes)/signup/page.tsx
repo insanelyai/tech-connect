@@ -24,7 +24,6 @@ const page = () => {
         <CardContent>
           <Signup />
         </CardContent>
-        <CardFooter></CardFooter>
       </Card>
     </div>
   );

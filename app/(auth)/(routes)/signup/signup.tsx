@@ -18,6 +18,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
+import toast from "react-hot-toast";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import { useRouter } from "next/navigation";
+
 const formSchema = z.object({
   username: z.string().min(2, {
     message: "Username must be at least 2 characters long",
@@ -29,6 +33,8 @@ const formSchema = z.object({
 });
 
 const Signup = () => {
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -39,7 +45,21 @@ const Signup = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    try {
+      const response = await axios.post("api/auth/signup", values);
+
+      console.log(response.status);
+
+      if (response.status === 200) {
+        toast.success("Successfully signed up!");
+        router.push("/");
+      } else if (response.status === 401) {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.log("[SIGNUP]", error);
+      toast.error("Failed! Please try again later.");
+    }
   };
 
   return (
