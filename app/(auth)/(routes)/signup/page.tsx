@@ -1,36 +1,33 @@
-"use client";
-
 import React from "react";
 
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
-const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters long",
-  }),
-  email: z.string().email(),
-  password: z.string().min(8, {
-    message: "Password must be at least 8 characters long",
-  }),
-});
+import Signup from "./signup";
 
-const SignupPage = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      username: "",
-      email: "",
-      password: "",
-    },
-  });
-
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
-  };
-
-  return <div className='w-full h-full flex items-center justify-center'></div>;
+const page = () => {
+  return (
+    <div className='w-full h-full md:h-[calc(100vh-100px)] flex items-center justify-center '>
+      <Card>
+        <CardHeader>
+          <CardTitle>Signup</CardTitle>
+          <CardDescription className='w-[300px]'>
+            It's not all work and no play.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Signup />
+        </CardContent>
+        <CardFooter></CardFooter>
+      </Card>
+    </div>
+  );
 };
 
-export default SignupPage;
+export default page;

@@ -5,7 +5,7 @@ import React from "react";
 
 const MobileNavbar = () => {
   return (
-    <div className='w-full h-[70px] flex items-center justify-center gap-8 md:hidden fixed top-[90%] bg-secondary '>
+    <div className='w-full h-[70px] flex items-center justify-center gap-8 md:hidden fixed z-50 top-[90%] bg-secondary '>
       <Button
         size={"icon"}
         variant={"outline"}
