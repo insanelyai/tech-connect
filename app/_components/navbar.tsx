@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
 import { usePathname } from "next/navigation";
+import { LogIn } from "lucide-react";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -29,7 +30,8 @@ const Navbar = () => {
         />
       </div>
 
-      <div className='flex gap-5'>
+      <div className='hidden md:flex gap-5'>
+        <ModeToggle />
         {routes.map((route) => {
           return (
             <Button
@@ -41,7 +43,14 @@ const Navbar = () => {
             </Button>
           );
         })}
+        <Button variant='secondary'>Login</Button>
+      </div>
+      <div className='md:hidden flex gap-5'>
         <ModeToggle />
+
+        <Button variant={"outline"} size={"icon"}>
+          <LogIn strokeWidth={1} />
+        </Button>
       </div>
     </div>
   );
