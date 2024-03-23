@@ -23,42 +23,38 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters long",
+  username: z.string().min(1, {
+    message: "Username required",
   }),
-  email: z.string().email(),
-  password: z.string().min(8, {
-    message: "Password must be at least 8 characters long",
+  password: z.string().min(1, {
+    message: "Password required",
   }),
 });
 
-const Signup = () => {
+const Login = () => {
   const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       username: "",
-      email: "",
       password: "",
     },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const res = await axios.post("api/auth/signup", values);
-
-      console.log(res.data.message);
+      const res = await axios.post("/api/auth/login", values);
 
       if (res.status === 200) {
-        toast.success("Successfully signed up!");
+        toast.success("Let'go!");
         router.push("/");
       }
     } catch (error: any) {
       if (error.response.status === 401) {
         toast.error(error.response.data.message);
       } else {
-        console.log("[SIGNUP]", error);
+        console.log("[LOGIN]", error);
         toast.error("Failed! Please try again later.");
       }
     }
@@ -77,24 +73,7 @@ const Signup = () => {
               <FormItem>
                 <FormLabel>Username</FormLabel>
                 <FormControl>
-                  <Input placeholder='e.g. node_lover' {...field} />
-                </FormControl>
-                <FormDescription>
-                  This is your public display name.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name='email'
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input placeholder='e.g. example@domain.com' {...field} />
+                  <Input placeholder='sera_miles' {...field} />
                 </FormControl>
 
                 <FormMessage />
@@ -123,4 +102,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Login;

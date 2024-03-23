@@ -43,13 +43,17 @@ const Navbar = () => {
             </Button>
           );
         })}
-        <Button variant='secondary'>Login</Button>
+        <Button variant='secondary' asChild>
+          <Link href={"/login"}>Login</Link>
+        </Button>
       </div>
       <div className='md:hidden flex gap-5'>
         <ModeToggle />
 
-        <Button variant={"outline"} size={"icon"}>
-          <LogIn strokeWidth={1} />
+        <Button variant={"outline"} size={"icon"} asChild>
+          <Link href={"/login"}>
+            <LogIn strokeWidth={1} />
+          </Link>
         </Button>
       </div>
     </div>

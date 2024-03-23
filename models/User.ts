@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { boolean } from "zod";
 
 const UserSchema = new mongoose.Schema({
   username: {
@@ -22,6 +23,14 @@ const UserSchema = new mongoose.Schema({
     default: false,
   },
   isMod: {
+    type: Boolean,
+    default: false,
+  },
+  isMember: {
+    type: Boolean,
+    default: false,
+  },
+  isBanned: {
     type: Boolean,
     default: false,
   },

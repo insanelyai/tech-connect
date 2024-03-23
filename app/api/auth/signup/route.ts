@@ -42,7 +42,7 @@ export async function POST(req: Request) {
       { status: 200 }
     );
   } catch (error) {
-    console.log("[AUTH]", error);
+    console.log("[AUTH]/signup", error);
     return NextResponse.json(
       { message: "Internal Server Error" },
       { status: 500 }
