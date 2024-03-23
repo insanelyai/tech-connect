@@ -19,7 +19,7 @@ import {
 import { Input } from "@/components/ui/input";
 
 import toast from "react-hot-toast";
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
@@ -46,19 +46,21 @@ const Signup = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const response = await axios.post("api/auth/signup", values);
+      const res = await axios.post("api/auth/signup", values);
 
-      console.log(response.status);
+      console.log(res.data.message);
 
-      if (response.status === 200) {
+      if (res.status === 200) {
         toast.success("Successfully signed up!");
         router.push("/");
-      } else if (response.status === 401) {
-        toast.error(response.data.message);
       }
-    } catch (error) {
-      console.log("[SIGNUP]", error);
-      toast.error("Failed! Please try again later.");
+    } catch (error: any) {
+      if (error.response.status === 401) {
+        toast.error(error.response.data.message);
+      } else {
+        console.log("[SIGNUP]", error);
+        toast.error("Failed! Please try again later.");
+      }
     }
   };
 

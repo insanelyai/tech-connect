@@ -13,12 +13,12 @@ export async function POST(req: Request) {
     if (user && user.email === email) {
       return NextResponse.json(
         { message: "Email already in use" },
-        { status: 409 }
+        { status: 401 }
       );
     } else if (user && user.username === username) {
       return NextResponse.json(
         { message: "Username already in use" },
-        { status: 409 }
+        { status: 401 }
       );
     }
 
@@ -33,11 +33,14 @@ export async function POST(req: Request) {
 
     const addUser = await newUser.save();
 
-    return NextResponse.json({
-      message: "Congratulations! You have successfully created an account",
-      success: true,
-      addUser,
-    });
+    return NextResponse.json(
+      {
+        message: "Congratulations! You have successfully created an account",
+        success: true,
+        addUser,
+      },
+      { status: 200 }
+    );
   } catch (error) {
     console.log("[AUTH]", error);
     return NextResponse.json(
