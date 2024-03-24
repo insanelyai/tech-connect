@@ -6,12 +6,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
-import { usePathname } from "next/navigation";
 import { LogIn } from "lucide-react";
 
 const Navbar = () => {
-  const pathname = usePathname();
-
   const routes: { title: string; href: string }[] = [
     { title: "Home", href: "/" },
     { title: "Blog", href: "/blog" },

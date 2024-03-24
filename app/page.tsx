@@ -1,8 +1,25 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
+import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
 
 export default function Home() {
+  const User = async () => {
+    try {
+      const respone = await axios.get("/api/user/fetch");
+      console.log(respone);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    User();
+  }, []);
+
   return (
     <>
       <div className='flex flex-col items-center justify-center w-full md:max-w-1/3 h-[50vh] space-y-6'>

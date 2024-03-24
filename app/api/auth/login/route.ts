@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
       email: user.email,
     };
 
-    const token = jwt.sign(tokenData, process.env.TOKEN_SECRET as string, {
+    const token = jwt.sign(tokenData, process.env.TOKEN_SECRET!, {
       expiresIn: "7d",
     });
 
@@ -50,7 +50,7 @@ export async function POST(req: NextRequest) {
       { status: 200 }
     );
 
-    response.cookies.set("__user_uat", token, { httpOnly: true });
+    response.cookies.set("uat", token, { httpOnly: true });
 
     return response;
   } catch (error) {

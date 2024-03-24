@@ -47,7 +47,7 @@ const Login = () => {
       const res = await axios.post("/api/auth/login", values);
 
       if (res.status === 200) {
-        toast.success("Let'go!");
+        toast.success("Logged in, Let'go!");
         router.push("/");
       }
     } catch (error: any) {
