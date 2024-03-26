@@ -2,15 +2,19 @@
 
 import { Button } from "@/components/ui/button";
 import axios from "axios";
-import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { ClientContext } from "./context/clientContext";
 
 export default function Home() {
+  const { setUser } = useContext(ClientContext);
+
   const User = async () => {
     try {
       const respone = await axios.get("/api/user/fetch");
-      console.log(respone);
+      if (respone.status === 200) {
+        setUser(respone.data);
+      }
     } catch (error) {
       console.log(error);
     }

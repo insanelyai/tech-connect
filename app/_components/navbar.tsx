@@ -19,12 +19,14 @@ const Navbar = () => {
   return (
     <div className='flex items-center justify-between px-10 w-[100%] h-[100px]'>
       <div className='flex'>
-        <Image
-          src={"./logo.svg"}
-          alt={"ConnectTech Logo"}
-          width={50}
-          height={50}
-        />
+        <Link href={"/"}>
+          <Image
+            src={"./logo.svg"}
+            alt={"ConnectTech Logo"}
+            width={50}
+            height={50}
+          />
+        </Link>
       </div>
 
       <div className='hidden md:flex gap-5'>

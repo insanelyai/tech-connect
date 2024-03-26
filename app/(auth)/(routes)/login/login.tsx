@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useContext } from "react";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -21,6 +21,7 @@ import { Input } from "@/components/ui/input";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { ClientContext } from "@/app/context/clientContext";
 
 const formSchema = z.object({
   username: z.string().min(1, {
@@ -34,6 +35,8 @@ const formSchema = z.object({
 const Login = () => {
   const router = useRouter();
 
+  const { user, setUser } = useContext(ClientContext);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -45,9 +48,9 @@ const Login = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       const res = await axios.post("/api/auth/login", values);
-
       if (res.status === 200) {
         toast.success("Logged in, Let'go!");
+        setUser(res.data.user);
         router.push("/");
       }
     } catch (error: any) {

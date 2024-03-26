@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "./_components/navbar";
 import MobileNavbar from "./_components/mobile-navbar";
 import { Toaster } from "react-hot-toast";
+import ClientProvider from "./context/clientContext";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -26,10 +27,12 @@ export default function RootLayout({
           defaultTheme='system'
           enableSystem
           disableTransitionOnChange>
-          <Navbar />
-          {children}
-          <MobileNavbar />
-          <Toaster />
+          <ClientProvider>
+            <Navbar />
+            {children}
+            <MobileNavbar />
+            <Toaster />
+          </ClientProvider>
         </ThemeProvider>
       </body>
     </html>
