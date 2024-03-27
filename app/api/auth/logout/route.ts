@@ -9,7 +9,7 @@ export async function GET() {
 
     response.cookies.set("uat", "", { httpOnly: true, expires: new Date(0) });
 
-    return NextResponse.json({ response }, { status: 200 });
+    return response;
   } catch (error) {
     console.log("[LOGOUT ERROR]", error);
     return NextResponse.json({ error: error }, { status: 500 });

@@ -9,7 +9,11 @@ interface decodedInterface extends JwtPayload {
 
 export const isAuthenticated = (req: NextRequest) => {
   try {
-    const token = req.cookies.get("uat")?.value || "";
+    const token = req.cookies.get("uat")?.value;
+
+    if (!token) {
+      return false;
+    }
 
     if (token) {
       const decoded: decodedInterface = jwt.verify(

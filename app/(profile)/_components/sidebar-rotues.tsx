@@ -35,10 +35,10 @@ const SidebarRoutes = () => {
     try {
       const response = await axios.get("/api/auth/logout");
 
-      if (response.status === 200) {
-        logout();
-        router.push("/");
-      }
+      console.log(response.data.message);
+
+      logout();
+      router.push("/");
     } catch (error) {
       console.log("[PROFILE ERROR]", error);
     }
