@@ -21,19 +21,23 @@ export type User = {
 export interface UserContextInterface {
   user: User;
   setUser: Dispatch<SetStateAction<User>>;
+  logout: () => void; // Add a logout function
 }
 
+const defaultUser: User = {
+  username: "",
+  email: "",
+  profileImage: "",
+  isAdmin: false,
+  isMod: false,
+  isMember: false,
+  isBanned: false,
+};
+
 const defaultState = {
-  user: {
-    username: "",
-    email: "",
-    profileImage: "",
-    isAdmin: false,
-    isMod: false,
-    isMember: false,
-    isBanned: false,
-  },
-  setUser: (user: User) => {},
+  user: defaultUser,
+  setUser: () => {},
+  logout: () => {}, // Initialize logout function with an empty function
 } as UserContextInterface;
 
 export const ClientContext = createContext<UserContextInterface>(defaultState);
@@ -43,18 +47,15 @@ type UserProviderProps = {
 };
 
 export default function ClientProvider({ children }: UserProviderProps) {
-  const [user, setUser] = useState<User>({
-    username: "",
-    email: "",
-    profileImage: "",
-    isAdmin: false,
-    isMod: false,
-    isMember: false,
-    isBanned: false,
-  });
+  const [user, setUser] = useState<User>(defaultUser);
+
+  // Function to clear the user context (logout)
+  const logout = () => {
+    setUser(defaultUser);
+  };
 
   return (
-    <ClientContext.Provider value={{ user, setUser }}>
+    <ClientContext.Provider value={{ user, setUser, logout }}>
       {children}
     </ClientContext.Provider>
   );

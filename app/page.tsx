@@ -7,7 +7,7 @@ import { useContext, useEffect } from "react";
 import { ClientContext } from "./context/clientContext";
 
 export default function Home() {
-  const { setUser } = useContext(ClientContext);
+  const { user, setUser } = useContext(ClientContext);
 
   const User = async () => {
     try {

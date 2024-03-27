@@ -1,14 +1,17 @@
 "use client";
 
-import React from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
-import { LogIn } from "lucide-react";
+import { LogIn, User } from "lucide-react";
+import { ClientContext } from "../context/clientContext";
 
 const Navbar = () => {
+  const { user } = useContext(ClientContext);
+
   const routes: { title: string; href: string }[] = [
     { title: "Home", href: "/" },
     { title: "Blog", href: "/blog" },
@@ -42,9 +45,21 @@ const Navbar = () => {
             </Button>
           );
         })}
-        <Button variant='secondary' asChild>
+        {/* <Button variant='secondary' asChild>
           <Link href={"/login"}>Login</Link>
-        </Button>
+        </Button> */}
+
+        {user.username === "" ? (
+          <Button variant='secondary' asChild>
+            <Link href={"/login"}>Login</Link>
+          </Button>
+        ) : (
+          <Button variant='secondary' className='rounded-full' asChild>
+            <Link href={"/profile"}>
+              <User />
+            </Link>
+          </Button>
+        )}
       </div>
       <div className='md:hidden flex gap-5'>
         <ModeToggle />
