@@ -54,7 +54,7 @@ const Navbar = () => {
             <Link href={"/login"}>Login</Link>
           </Button>
         ) : (
-          <Button variant='secondary' className='rounded-full' asChild>
+          <Button variant='secondary' size={"icon"} asChild>
             <Link href={"/profile"}>
               <User />
             </Link>
@@ -64,11 +64,25 @@ const Navbar = () => {
       <div className='md:hidden flex gap-5'>
         <ModeToggle />
 
-        <Button variant={"outline"} size={"icon"} asChild>
+        {/* <Button variant={"outline"} size={"icon"} asChild>
           <Link href={"/login"}>
             <LogIn strokeWidth={1} />
           </Link>
-        </Button>
+        </Button> */}
+
+        {user.username === "" ? (
+          <Button variant={"outline"} size={"icon"} asChild>
+            <Link href={"/login"}>
+              <LogIn strokeWidth={1} />
+            </Link>
+          </Button>
+        ) : (
+          <Button variant='secondary' size={"icon"} asChild>
+            <Link href={"/profile"}>
+              <User />
+            </Link>
+          </Button>
+        )}
       </div>
     </div>
   );

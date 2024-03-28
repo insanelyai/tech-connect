@@ -46,20 +46,23 @@ const SidebarRoutes = () => {
 
   return (
     <div className='w-full h-full'>
-      {sideroutes.map((route) => (
+      <div className='flex flex-col justify-center items-center gap-4'>
+        {sideroutes.map((route) => (
+          <Button
+            variant={"ghost"}
+            className='space-x-2 w-[100%] h-[5vh] flex items-center justify-start rounded-xs'
+            key={route.name}>
+            <route.icon strokeWidth={1} size={20} />
+            <span>{route.name}</span>
+          </Button>
+        ))}
         <Button
-          className='space-x-2 my-4 w-[100%] h-[5vh] flex items-center justify-start rounded-xs'
-          key={route.name}>
-          <route.icon strokeWidth={1} size={20} />
-          <span>{route.name}</span>
+          className='space-x-2 my-4 w-[90%] h-[5vh] flex items-center justify-start rounded-sm'
+          onClick={onLogout}>
+          <Key strokeWidth={1} size={20} />
+          <span>Logout</span>
         </Button>
-      ))}
-      <Button
-        className='space-x-2 my-4 w-[100%] h-[5vh] flex items-center justify-start rounded-xs'
-        onClick={onLogout}>
-        <Key strokeWidth={1} size={20} />
-        <span>Logout</span>
-      </Button>
+      </div>
     </div>
   );
 };
