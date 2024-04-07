@@ -1,4 +1,5 @@
 import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
 import React from "react";
 
 const EventDisplay = () => {
@@ -13,6 +14,24 @@ const EventDisplay = () => {
         </div>
         <div>
           <Badge>Registration Open</Badge>
+        </div>
+        <div>
+          <Image
+            src={"/event.png"}
+            alt='Featured'
+            sizes={"100vh"}
+            width={100}
+            height={100}
+            style={{
+              width: "100%",
+              objectFit: "cover",
+              backgroundPosition: "center",
+            }}
+            className='rounded-sm my-5'
+          />
+        </div>
+        <div className='my-6'>
+          <span className='text-3xl'>Details</span>
         </div>
       </div>
     </div>

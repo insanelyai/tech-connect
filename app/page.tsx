@@ -5,9 +5,13 @@ import axios from "axios";
 import Link from "next/link";
 import { useContext, useEffect } from "react";
 import { ClientContext } from "./context/clientContext";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
-  const { user, setUser } = useContext(ClientContext);
+  const { user, setUser, logout } = useContext(ClientContext);
+
+  const router = useRouter();
 
   const User = async () => {
     try {
@@ -15,7 +19,10 @@ export default function Home() {
       if (respone.status === 200) {
         setUser(respone.data);
       }
-    } catch (error) {
+    } catch (error: any) {
+      if (error.response.status === 401) {
+        logout();
+      }
       console.log(error);
     }
   };
