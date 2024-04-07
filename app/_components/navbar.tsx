@@ -15,7 +15,7 @@ const Navbar = () => {
   const routes: { title: string; href: string }[] = [
     { title: "Home", href: "/" },
     { title: "Blog", href: "/blog" },
-    { title: "Chat", href: "/chat" },
+    { title: "Chat", href: "http://localhost:3001/" },
     { title: "Events", href: "/events" },
   ];
 
