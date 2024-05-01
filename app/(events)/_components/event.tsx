@@ -1,13 +1,42 @@
-import { Button } from "@/components/ui/button";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import Image from "next/image";
 import React from "react";
 
-const Event = ({ name, dates }: { name: string; dates: string }) => {
-  return (
-    <Button className='w-[100%] h-auto  mx-5 bg-secondary text-foreground flex flex-col items-start justify-center space-y-2'>
-      <span className='text-lg'>{name}</span>
+interface EventProps {
+  event: string;
+  image: string;
+  description: string;
+  date: string;
+}
 
-      <span>Date: {dates}</span>
-    </Button>
+const Event = ({ event, image, description, date }: EventProps) => {
+  return (
+    <div className='flex flex-col px-10 py-5 mx-10 scroll-smooth'>
+      <span className='text-lg font-bold'>EVENT</span>
+      <span className='text-base font-bold text-secondary'>
+        {date.toString().split("T")[0]}
+      </span>
+
+      <div className='flex flex-col space-y-6'>
+        <h2 className='text-3xl font-black tracking-wide uppercase'>{event}</h2>
+        <span className='text-base font-medium'></span>
+        <div className='w-full'>
+          <AspectRatio ratio={16 / 9}>
+            <Image
+              src={image}
+              alt={event}
+              fill
+              sizes='100vh'
+              className='rounded-md object-cover'
+            />
+          </AspectRatio>
+        </div>
+        <div className='w-full flex flex-col space-y-3'>
+          <span className='text-lg font-bold '>DESCRIPTION</span>
+          <span>{description}</span>
+        </div>
+      </div>
+    </div>
   );
 };
 
