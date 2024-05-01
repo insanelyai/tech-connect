@@ -11,7 +11,7 @@ interface EventProps {
 
 const Event = ({ event, image, description, date }: EventProps) => {
   return (
-    <div className='flex flex-col px-10 py-5 mx-10 scroll-smooth'>
+    <div className='flex flex-col px-10 py-5 scroll-smooth'>
       <span className='text-lg font-bold'>EVENT</span>
       <span className='text-base font-bold text-secondary'>
         {date.toString().split("T")[0]}
